@@ -5,7 +5,7 @@
 #SBATCH --error=%x_%j.err
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=20 # 10 chunks * 2 cpus/chunk = 20 cpus total
-#SBATCH --mem=250G # 10 chunks * 28G/chunk + 40G buffer = 320G total
+#SBATCH --mem=250G 
 #SBATCH --array=1-193
 #SBATCH --partition=batch
 
