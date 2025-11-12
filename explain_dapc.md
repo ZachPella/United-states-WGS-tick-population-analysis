@@ -200,7 +200,7 @@ For questions or issues, please contact the repository maintainer.
 
 ##These next two are for Nebraska, Kansas, and Iowa only
 
-K=2
+## K=2
 <img width="763" height="613" alt="Screenshot 2025-10-28 152049" src="https://github.com/user-attachments/assets/a95dd700-230e-4776-bec7-b150f991ac80" />
 
 <img width="771" height="611" alt="Screenshot 2025-10-28 152056" src="https://github.com/user-attachments/assets/88c0dc5a-4bd7-4508-88f1-32df7f174483" />
@@ -227,7 +227,7 @@ K=2
 
 
 
-K=3
+## K=3
 
 <img width="959" height="767" alt="Screenshot 2025-10-28 152820" src="https://github.com/user-attachments/assets/61b3d14d-9fd9-4c1f-a136-ba054807f90c" />
 
@@ -251,17 +251,17 @@ K=3
 
 
 
-##These are for all WGS data in United States!
-[step1_BIC_plot.pdf](https://github.com/user-attachments/files/23507769/step1_BIC_plot.pdf)
-[step2_PCA_scatter.pdf](https://github.com/user-attachments/files/23507770/step2_PCA_scatter.pdf)
-[step2_prelim_dapc.pdf](https://github.com/user-attachments/files/23507771/step2_prelim_dapc.pdf)
-[step3_a_score_optimization.pdf](https://github.com/user-attachments/files/23507772/step3_a_score_optimization.pdf)
-[step4_final_dapc.pdf](https://github.com/user-attachments/files/23507773/step4_final_dapc.pdf)
-[step5_DAPC_scatter_plot.pdf](https://github.com/user-attachments/files/23507774/step5_DAPC_scatter_plot.pdf)
-[Admixture_K2_State_Final_Order.pdf](https://github.com/user-attachments/files/23507777/Admixture_K2_State_Final_Order.pdf)
-<img width="1526" height="1005" alt="ixodes_final_analysis_samples" src="https://github.com/user-attachments/assets/5853f51a-bb31-4e90-875e-6c2d4b5035e0" />
+## These are for all WGS data in United States!
 
-
+<img width="955" height="768" alt="Screenshot 2025-10-30 100636" src="https://github.com/user-attachments/assets/50dbe731-6221-4fc4-9ca4-df8a0b0aeaf9" />
+<img width="952" height="769" alt="Screenshot 2025-10-30 100644" src="https://github.com/user-attachments/assets/e6b0f06f-99ee-4141-8af1-d67260edbb0f" />
+<img width="960" height="769" alt="Screenshot 2025-10-30 100653" src="https://github.com/user-attachments/assets/c7582b1f-36be-4dda-b635-83d018a9f152" />
+<img width="959" height="767" alt="Screenshot 2025-10-30 100702" src="https://github.com/user-attachments/assets/2d6b36da-ce4c-47d7-8887-e7ad74e7a168" />
+<img width="958" height="767" alt="Screenshot 2025-10-30 100709" src="https://github.com/user-attachments/assets/cd822044-4483-4ed8-a645-3455cfadd70b" />
+<img width="957" height="764" alt="Screenshot 2025-10-30 100745" src="https://github.com/user-attachments/assets/c4704081-1727-4057-8a12-05495001a633" />
+<img width="963" height="766" alt="Screenshot 2025-10-30 100735" src="https://github.com/user-attachments/assets/1c7abae1-c93e-4f58-80cc-b6a292345736" />
+<img width="956" height="772" alt="Screenshot 2025-10-30 100729" src="https://github.com/user-attachments/assets/b88e3ed9-704a-48aa-8279-15de32c4ee5d" />
+<img width="959" height="769" alt="Screenshot 2025-10-30 100718" src="https://github.com/user-attachments/assets/90a3fa2f-4e75-490a-9cb9-fc7f8a6ee233" />
 
 
 
