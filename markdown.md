@@ -23,6 +23,7 @@
   - [Step 16: Population Structure Analysis](#step-16-population-structure-analysis)
   - [Step 17: Advanced PCA Visualization and Population Analysis](#step-17-advanced-pca-visualization-and-population-analysis)
 - [Pipeline Completion Summary](#pipeline-completion-summary)
+<img width="1445" height="830" alt="tick_pipeline_full_diagram_thick_lines" src="https://github.com/user-attachments/assets/cad84e3f-0044-473b-af6f-8dfb9fca0b76" />
 
 ---
 
