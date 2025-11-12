@@ -198,6 +198,7 @@ This script is provided as-is for research purposes.
 
 For questions or issues, please contact the repository maintainer.
 
+##These next two are for Nebraska, Kansas, and Iowa only
 
 K=2
 <img width="763" height="613" alt="Screenshot 2025-10-28 152049" src="https://github.com/user-attachments/assets/a95dd700-230e-4776-bec7-b150f991ac80" />
@@ -245,3 +246,17 @@ K=3
 <img width="953" height="769" alt="Screenshot 2025-10-28 152859" src="https://github.com/user-attachments/assets/fb362e93-71a3-48db-95d1-de7e8c6a6c87" />
 
 <img width="960" height="766" alt="Screenshot 2025-10-28 152905" src="https://github.com/user-attachments/assets/461bf766-2630-49bc-88cc-59e8bae1f6e9" />
+
+
+
+
+
+##These are for all WGS data in United States!
+[step5_DAPC_scatter_plot.pdf](https://github.com/user-attachments/files/23507468/step5_DAPC_scatter_plot.pdf)
+[step4_final_dapc.pdf](https://github.com/user-attachments/files/23507466/step4_final_dapc.pdf)
+[step3_a_score_optimization.pdf](https://github.com/user-attachments/files/23507465/step3_a_score_optimization.pdf)
+[step2_prelim_dapc.pdf](https://github.com/user-attachments/files/23507464/step2_prelim_dapc.pdf)
+[step2_PCA_scatter.pdf](https://github.com/user-attachments/files/23507463/step2_PCA_scatter.pdf)
+[step1_BIC_plot.pdf](https://github.com/user-attachments/files/23507461/step1_BIC_plot.pdf)
+<img width="1526" height="1005" alt="ixodes_final_analysis_samples" src="https://github.com/user-attachments/assets/5892bb5f-6213-425c-aea4-902c46980631" />
+[Admixture_K2_State_Final_Order.pdf](https://github.com/user-attachments/files/23507458/Admixture_K2_State_Final_Order.pdf)
