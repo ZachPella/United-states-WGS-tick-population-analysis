@@ -30,7 +30,7 @@ echo "Creating a VCF with only the variants that passed the filters..."
 gatk --java-options "-Xms2G -Xmx15G" SelectVariants \
     --variant "${INPUT_FILTERED_VCF}" \
     --output "${OUTPUT_PASSING_ONLY_VCF}" \
-    --select 'vc.isNotFiltered()'
+    --exclude-filtered
 
 echo "SelectVariants completed."
 echo "VCF with passing-only variants created: ${OUTPUT_PASSING_ONLY_VCF}"
