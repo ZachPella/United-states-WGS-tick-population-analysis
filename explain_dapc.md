@@ -1,6 +1,6 @@
-# DAPC Analysis for *R. megacantha* Reference-Based Dataset
+# DAPC Analysis for *Ixodes scapularis* Reference-Based Dataset
 
-This repository contains an R script for performing Discriminant Analysis of Principal Components (DAPC) on *R. megacantha* genomic data.
+This repository contains an R script for performing Discriminant Analysis of Principal Components (DAPC) on *Ixodes scapularis* genomic data.
 
 ## Overview
 
