@@ -255,14 +255,12 @@ For questions or issues, please contact the repository maintainer.
 
 <img width="955" height="768" alt="Screenshot 2025-10-30 100636" src="https://github.com/user-attachments/assets/50dbe731-6221-4fc4-9ca4-df8a0b0aeaf9" />
 <img width="952" height="769" alt="Screenshot 2025-10-30 100644" src="https://github.com/user-attachments/assets/e6b0f06f-99ee-4141-8af1-d67260edbb0f" />
-<img width="960" height="769" alt="Screenshot 2025-10-30 100653" src="https://github.com/user-attachments/assets/c7582b1f-36be-4dda-b635-83d018a9f152" />
-<img width="959" height="767" alt="Screenshot 2025-10-30 100702" src="https://github.com/user-attachments/assets/2d6b36da-ce4c-47d7-8887-e7ad74e7a168" />
-<img width="958" height="767" alt="Screenshot 2025-10-30 100709" src="https://github.com/user-attachments/assets/cd822044-4483-4ed8-a645-3455cfadd70b" />
-<img width="957" height="764" alt="Screenshot 2025-10-30 100745" src="https://github.com/user-attachments/assets/c4704081-1727-4057-8a12-05495001a633" />
-<img width="963" height="766" alt="Screenshot 2025-10-30 100735" src="https://github.com/user-attachments/assets/1c7abae1-c93e-4f58-80cc-b6a292345736" />
-<img width="956" height="772" alt="Screenshot 2025-10-30 100729" src="https://github.com/user-attachments/assets/b88e3ed9-704a-48aa-8279-15de32c4ee5d" />
-<img width="959" height="769" alt="Screenshot 2025-10-30 100718" src="https://github.com/user-attachments/assets/90a3fa2f-4e75-490a-9cb9-fc7f8a6ee233" />
-
-
+<img width="960" height="769" alt="Screenshot 2025-10-30 100653" src="https://github.com/user-attachments/assets/a8a08816-1e42-4340-90fa-7c1327ef5298" />
+<img width="959" height="767" alt="Screenshot 2025-10-30 100702" src="https://github.com/user-attachments/assets/69692f7b-7b11-45a5-905e-a245d13bfa6c" />
+<img width="958" height="767" alt="Screenshot 2025-10-30 100709" src="https://github.com/user-attachments/assets/8ffe1b9e-f8d9-4a0d-b130-add2a74f07fc" />
+<img width="959" height="769" alt="Screenshot 2025-10-30 100718" src="https://github.com/user-attachments/assets/fe0a333d-fc80-41b2-892b-6ed6daea7266" />
+<img width="956" height="772" alt="Screenshot 2025-10-30 100729" src="https://github.com/user-attachments/assets/d817f36c-bc48-4041-8998-a7ff0fc4cd02" />
+<img width="963" height="766" alt="Screenshot 2025-10-30 100735" src="https://github.com/user-attachments/assets/5ebfe332-261b-4740-a1d3-3e1d8cffcc3d" />
+<img width="957" height="764" alt="Screenshot 2025-10-30 100745" src="https://github.com/user-attachments/assets/98781faa-ac3d-4728-8bc2-8b4e521aaa75" />
 
 
