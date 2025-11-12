@@ -252,11 +252,17 @@ K=3
 
 
 ##These are for all WGS data in United States!
-[step5_DAPC_scatter_plot.pdf](https://github.com/user-attachments/files/23507468/step5_DAPC_scatter_plot.pdf)
-[step4_final_dapc.pdf](https://github.com/user-attachments/files/23507466/step4_final_dapc.pdf)
-[step3_a_score_optimization.pdf](https://github.com/user-attachments/files/23507465/step3_a_score_optimization.pdf)
-[step2_prelim_dapc.pdf](https://github.com/user-attachments/files/23507464/step2_prelim_dapc.pdf)
-[step2_PCA_scatter.pdf](https://github.com/user-attachments/files/23507463/step2_PCA_scatter.pdf)
-[step1_BIC_plot.pdf](https://github.com/user-attachments/files/23507461/step1_BIC_plot.pdf)
-<img width="1526" height="1005" alt="ixodes_final_analysis_samples" src="https://github.com/user-attachments/assets/5892bb5f-6213-425c-aea4-902c46980631" />
-[Admixture_K2_State_Final_Order.pdf](https://github.com/user-attachments/files/23507458/Admixture_K2_State_Final_Order.pdf)
+[step1_BIC_plot.pdf](https://github.com/user-attachments/files/23507769/step1_BIC_plot.pdf)
+[step2_PCA_scatter.pdf](https://github.com/user-attachments/files/23507770/step2_PCA_scatter.pdf)
+[step2_prelim_dapc.pdf](https://github.com/user-attachments/files/23507771/step2_prelim_dapc.pdf)
+[step3_a_score_optimization.pdf](https://github.com/user-attachments/files/23507772/step3_a_score_optimization.pdf)
+[step4_final_dapc.pdf](https://github.com/user-attachments/files/23507773/step4_final_dapc.pdf)
+[step5_DAPC_scatter_plot.pdf](https://github.com/user-attachments/files/23507774/step5_DAPC_scatter_plot.pdf)
+[Admixture_K2_State_Final_Order.pdf](https://github.com/user-attachments/files/23507777/Admixture_K2_State_Final_Order.pdf)
+<img width="1526" height="1005" alt="ixodes_final_analysis_samples" src="https://github.com/user-attachments/assets/5853f51a-bb31-4e90-875e-6c2d4b5035e0" />
+
+
+
+
+
+
