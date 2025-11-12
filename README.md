@@ -9,8 +9,8 @@ This repository contains a comprehensive 17-step bioinformatics pipeline for ana
 <img width="1382" height="989" alt="tick_pca_colored_by_NE_county" src="https://github.com/user-attachments/assets/a7f618e0-ae9a-4497-af83-90e5a31ac07f" />
 <img width="1377" height="989" alt="tick_pca_all_samples_NE_north_and_south_all_else_black_or_white" src="https://github.com/user-attachments/assets/25273d05-fe59-42de-bbf9-4d78ef688af8" />
 <img width="2701" height="1990" alt="image0" src="https://github.com/user-attachments/assets/06612793-9f3e-4c73-b0ad-b011b7c5407e" />
-![unnamed](https://github.com/user-attachments/assets/3dc991d1-07ef-475a-b53e-bcc359ec4930)
-![unnamed](https://github.com/user-attachments/assets/cfea9503-542a-49a6-8d97-acc67dfe2eb3)
+(https://github.com/user-attachments/assets/3dc991d1-07ef-475a-b53e-bcc359ec4930)
+(https://github.com/user-attachments/assets/cfea9503-542a-49a6-8d97-acc67dfe2eb3)
 
 ## Pipeline Workflow
 
