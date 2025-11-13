@@ -29,17 +29,17 @@
 
 ## Pipeline Overview
 
-This pipeline processes 61 tick samples through a comprehensive genomics workflow covering:
+This pipeline processes 193 tick samples through a comprehensive genomics workflow covering:
 1. **Preprocessing (Steps 1-8)**: Raw read processing, quality control, alignment, and preparation
 2. **Variant Calling (Steps 9-11)**: GATK-based variant discovery and joint genotyping
 3. **Filtering & Analysis (Steps 12-17)**: Post-processing, filtering, and population genetic analysis
 
-**Dataset**: NovaSeq sequencing data from 61 *Ixodes scapularis* samples
+**Dataset**: NovaSeq sequencing data from 193 *Ixodes scapularis* samples
 **Output Goal**: Population structure analysis via PCA and genetic diversity metrics
 
 
 
-<img width="801" height="661" alt="pipeline_diagram" src="https://github.com/user-attachments/assets/f11c1b42-fd5a-41bf-b45a-118bb8a1a209" />
+<img width="801" height="6193" alt="pipeline_diagram" src="https://github.com/user-attachments/assets/f11c1b42-fd5a-41bf-b45a-118bb8a1a209" />
 ---
 
 ## Preprocessing Steps (1-8)
@@ -47,7 +47,7 @@ This pipeline processes 61 tick samples through a comprehensive genomics workflo
 ### Step 1: Lane Concatenation
 **Script**: `preprocess_01_concatenate.sh`  
 **Tools**: bash commands  
-**Runtime**: 30 seconds, 61 parallel jobs  
+**Runtime**: 30 seconds, 193 parallel jobs  
 
 #### Purpose and Context
 This script addresses a common sequencing scenario where individual samples were sequenced across multiple lanes of the same sequencing run to increase coverage depth or optimize sequencing performance. Each tick sample was sequenced on two lanes (L001 and L002) of a NovaSeq run, requiring consolidation before downstream processing.
@@ -56,7 +56,7 @@ This script addresses a common sequencing scenario where individual samples were
 When samples are sequenced across multiple lanes, you get separate FASTQ files for each lane containing reads from the same DNA library. These represent identical genetic material processed through different physical lanes of the sequencer. The reads in L001 and L002 files sample the same underlying tick genome - they're technical replicates from the sequencing process rather than biological replicates.
 
 #### Input Data Structure
-For each of the 61 tick samples, the script expects four separate files:
+For each of the 193 tick samples, the script expects four separate files:
 - `SAMPLE_L001_R1_*.fastq.gz` (forward reads from lane 1)  
 - `SAMPLE_L001_R2_*.fastq.gz` (reverse reads from lane 1)
 - `SAMPLE_L002_R1_*.fastq.gz` (forward reads from lane 2)
@@ -86,14 +86,14 @@ This creates a clean, standardized input format for the subsequent quality contr
 - Script includes robust error checking for missing files
 - Verifies successful output file creation
 - Provides detailed logging for troubleshooting
-- Uses SLURM array jobs for efficient parallel processing of all 61 samples
+- Uses SLURM array jobs for efficient parallel processing of all 193 samples
 
 ---
 
 ### Step 2: Quality Control and Read Trimming
 **Script**: `preprocess_02_qc_fastp.sh`  
 **Tools**: fastp  
-**Runtime**: 1 hour, 61 parallel jobs  
+**Runtime**: 1 hour, 193 parallel jobs  
 
 #### Purpose and Context
 This step performs comprehensive quality control on the concatenated raw sequencing reads. After combining lane data in Step 1, we now need to assess and improve read quality by removing low-quality bases, adapter sequences, and reads that don't meet minimum quality standards. This is critical for accurate downstream alignment and variant calling.
@@ -160,7 +160,7 @@ This cleaned, high-quality read data serves as optimal input for the subsequent 
 ### Step 3: Post-Cleaning Quality Assessment
 **Script**: `preprocess_03_qc_fastqc.sh`  
 **Tools**: FastQC v0.12  
-**Runtime**: 1 minute, 61 parallel jobs, 4 threads each  
+**Runtime**: 1 minute, 193 parallel jobs, 4 threads each  
 
 #### Purpose and Context
 This step provides comprehensive quality assessment of the fastp-cleaned reads to verify that the trimming and filtering process was effective. While fastp performs quality control, FastQC provides detailed diagnostic reports that allow visual inspection of read quality metrics and identification of any remaining issues before proceeding to genome alignment.
@@ -169,7 +169,7 @@ This step provides comprehensive quality assessment of the fastp-cleaned reads t
 After fastp processing, it's essential to verify that:
 - Quality trimming was effective and reads now meet alignment standards
 - No systematic biases were introduced during processing
-- Read quality is consistent across all 61 tick samples
+- Read quality is consistent across all 193 tick samples
 - Any remaining technical artifacts are identified before expensive alignment steps
 
 This quality assessment serves as a checkpoint to catch problems early rather than discovering issues after time-intensive downstream processing.
@@ -235,7 +235,7 @@ The FastQC reports provide the final quality checkpoint before proceeding to the
 ### Step 4: Genome Alignment
 **Script**: `preprocess_04_align_bwa.sh`  
 **Tools**: BWA-MEM  
-**Runtime**: 13 hours, 61 parallel jobs, 4 threads each, 45GB memory  
+**Runtime**: 13 hours, 193 parallel jobs, 4 threads each, 45GB memory  
 
 #### Purpose and Context
 This step performs the core genomic alignment, mapping the cleaned sequencing reads to the *Ixodes scapularis* reference genome. This is the most computationally intensive preprocessing step, transforming millions of short DNA sequences into genomic coordinates that reveal where each read originated in the tick genome. The alignment results form the foundation for all subsequent variant calling and population genetic analyses.
@@ -304,7 +304,7 @@ Well-performing tick samples typically show:
 #### Computational Considerations
 - **Runtime**: 6-day allocation reflects the computational intensity of aligning millions of reads
 - **Memory requirements**: 45GB accommodates large genome and alignment index in memory
-- **Parallel processing**: 61 simultaneous jobs maximize cluster efficiency
+- **Parallel processing**: 193 simultaneous jobs maximize cluster efficiency
 - **I/O optimization**: Direct output to SAM format minimizes intermediate file handling
 
 The SAM files generated in this step contain the complete alignment information needed for downstream BAM conversion, read group addition, and duplicate removal before variant calling.
@@ -314,7 +314,7 @@ The SAM files generated in this step contain the complete alignment information 
 ### Step 5: SAM to BAM Conversion and Sorting
 **Script**: `preprocess_05_sam_to_bam.sh`  
 **Tools**: samtools v1.19  
-**Runtime**: 1 hour, 61 parallel jobs, 2 threads each, 32GB memory  
+**Runtime**: 1 hour, 193 parallel jobs, 2 threads each, 32GB memory  
 
 #### Purpose and Context
 This step converts the text-based SAM alignment files to the binary BAM format and performs coordinate-based sorting. While SAM files are human-readable, they are inefficient for computational processing. BAM files provide the same information in a compressed, indexed format that enables rapid access and analysis. Additionally, this step generates comprehensive alignment statistics that are crucial for quality assessment.
@@ -405,7 +405,7 @@ Well-performing tick samples typically show:
 #### Computational Considerations
 - **Memory allocation**: 32GB accommodates large tick genome datasets and sorting operations
 - **Temporary storage**: Uses dedicated temporary directories to avoid I/O conflicts
-- **Parallel processing**: 61 simultaneous conversions maximize cluster efficiency
+- **Parallel processing**: 193 simultaneous conversions maximize cluster efficiency
 - **Quality control**: Multiple verification steps ensure successful file conversion
 
 The sorted BAM files and comprehensive statistics generated in this step provide the foundation for subsequent read group addition and duplicate removal, while the quality metrics enable early identification of problematic samples before proceeding to computationally expensive variant calling steps.
@@ -415,7 +415,7 @@ The sorted BAM files and comprehensive statistics generated in this step provide
 ### Step 6: Read Group Addition
 **Script**: `preprocess_06_add_readgroups.sh`  
 **Tools**: Picard AddOrReplaceReadGroups, samtools v1.19  
-**Runtime**: 25 minutes, 61 parallel jobs, 35GB memory  
+**Runtime**: 25 minutes, 193 parallel jobs, 35GB memory  
 
 #### Purpose and Context
 This step adds essential metadata (read groups) to each BAM file that identifies the source, library preparation, and sequencing details for every read. Read groups are mandatory for GATK variant calling tools and enable proper handling of technical artifacts, batch effects, and multi-sample analysis. Without proper read group information, GATK will reject the BAM files in subsequent variant calling steps.
@@ -506,7 +506,7 @@ The read group-annotated BAM files generated in this step are now properly forma
 ### Step 7: Duplicate Removal
 **Script**: `preprocess_07_dedup.sh`  
 **Tools**: Picard MarkDuplicates, samtools v1.19  
-**Runtime**: 30 minutes, 61 parallel jobs, 35GB memory  
+**Runtime**: 30 minutes, 193 parallel jobs, 35GB memory  
 
 #### Purpose and Context
 This step identifies and removes PCR duplicate reads that artificially inflate coverage at specific genomic positions. PCR duplicates arise during library preparation when the same DNA template molecule is amplified multiple times, creating multiple sequencing reads that represent the same original genomic location. Removing these duplicates is essential for accurate variant calling, as they can create false signals that bias variant frequency estimates and quality scores.
@@ -600,7 +600,7 @@ Well-performing samples should demonstrate:
 - **Successful processing**: Complete metrics files and indexed BAM output
 - **Maintained data quality**: Preserved alignment quality after deduplication
 
-The deduplicated BAM files generated in this step represent the final, analysis-ready preprocessing output. These files contain high-quality, unique alignments with proper metadata formatting required for GATK variant calling. The comprehensive metrics generated also provide important quality control information for assessing library preparation success and sample comparability across the 61 tick samples.
+The deduplicated BAM files generated in this step represent the final, analysis-ready preprocessing output. These files contain high-quality, unique alignments with proper metadata formatting required for GATK variant calling. The comprehensive metrics generated also provide important quality control information for assessing library preparation success and sample comparability across the 193 tick samples.
 
 ---
 
@@ -610,10 +610,10 @@ The deduplicated BAM files generated in this step represent the final, analysis-
 **Runtime**: 1 second, single job, 50GB memory  
 
 #### Purpose and Context
-This step consolidates quality metrics from all previous preprocessing steps into a comprehensive summary table that enables systematic evaluation of the entire dataset. Rather than examining individual sample files scattered across multiple directories, this creates a single unified view of preprocessing success across all 61 tick samples plus the negative control. This summary is essential for identifying problematic samples and assessing overall dataset quality before proceeding to computationally expensive variant calling.
+This step consolidates quality metrics from all previous preprocessing steps into a comprehensive summary table that enables systematic evaluation of the entire dataset. Rather than examining individual sample files scattered across multiple directories, this creates a single unified view of preprocessing success across all 193 tick samples plus the negative control. This summary is essential for identifying problematic samples and assessing overall dataset quality before proceeding to computationally expensive variant calling.
 
 #### Biological and Technical Rationale
-After processing 61 samples through 7 preprocessing steps, it's crucial to:
+After processing 193 samples through 7 preprocessing steps, it's crucial to:
 - **Identify outlier samples**: Detect samples with unusual quality metrics that might need special handling
 - **Assess processing uniformity**: Ensure consistent processing success across all samples
 - **Quality gate checkpoint**: Make informed decisions about which samples to include in variant calling
@@ -716,7 +716,7 @@ This comprehensive summary provides the critical quality assessment needed befor
 ### Step 9: Individual Sample Variant Calling
 **Script**: `variant_01_haplotypecaller.sh`  
 **Tools**: GATK4 v4.6 HaplotypeCaller  
-**Runtime**: 10 hours, 61 parallel jobs, 20 CPUs each, 110GB memory  
+**Runtime**: 10 hours, 193 parallel jobs, 20 CPUs each, 110GB memory  
 
 #### Purpose and Context
 This step performs the core variant discovery process, identifying SNPs and small indels in each tick sample individually using GATK's HaplotypeCaller algorithm. Rather than calling variants across all samples simultaneously, this approach first generates comprehensive variant data for each sample in GVCF (Genomic Variant Call Format) files. The GVCF format captures both variant and non-variant sites with confidence information, enabling sophisticated joint genotyping in subsequent steps.
@@ -820,7 +820,7 @@ This step transforms the analysis-ready BAM files into comprehensive variant dat
 **Runtime**: 8 hours, 10 parallel jobs (one per genomic chunk), 2 CPUs each, 115GB memory  
 
 #### Purpose and Context
-This step consolidates the scattered GVCF files from all 61 tick samples into an efficient GenomicsDB workspace that enables scalable joint genotyping. While Step 9 generated 610 individual GVCF chunks (61 samples × 10 chunks each), this step organizes them into 10 GenomicsDB workspaces corresponding to the genomic intervals. This data structure transformation is essential for the efficient joint variant calling that follows.
+This step consolidates the scattered GVCF files from all 193 tick samples into an efficient GenomicsDB workspace that enables scalable joint genotyping. While Step 9 generated 1930 individual GVCF chunks (193 samples × 10 chunks each), this step organizes them into 10 GenomicsDB workspaces corresponding to the genomic intervals. This data structure transformation is essential for the efficient joint variant calling that follows.
 
 #### Biological Rationale for GenomicsDB
 GenomicsDB addresses critical challenges in population genomics:
@@ -849,7 +849,7 @@ The script implements a chunk-based consolidation approach:
 
 **Interval-based organization**: Creates separate GenomicsDB workspaces for each of the 10 genomic chunks, maintaining the same partitioning strategy used in individual variant calling.
 
-**Cross-sample integration**: For each genomic chunk, consolidates the corresponding GVCF files from all 61 tick samples into a single GenomicsDB workspace.
+**Cross-sample integration**: For each genomic chunk, consolidates the corresponding GVCF files from all 193 tick samples into a single GenomicsDB workspace.
 
 **Scratch space optimization**: Uses high-performance scratch storage during processing to minimize I/O bottlenecks, then copies completed workspaces to permanent storage.
 
@@ -857,7 +857,7 @@ The script implements a chunk-based consolidation approach:
 
 #### Input Data Structure
 Takes scattered GVCF files from Step 9:
-- `scattered_gvcfs/SAMPLE_NAME/SAMPLE_NAME.XXXX.g.vcf` (610 total GVCF chunks across all samples)
+- `scattered_gvcfs/SAMPLE_NAME/SAMPLE_NAME.XXXX.g.vcf` (1930 total GVCF chunks across all samples)
 
 #### Processing Parameters and Optimization
 
@@ -874,7 +874,7 @@ Generates genomic interval-specific databases:
 - `genomicsdb_chunks/chunk_XXXX/` (10 GenomicsDB workspaces, one per genomic interval)
 
 Each workspace contains:
-- Compressed variant data from all 61 samples for that genomic region
+- Compressed variant data from all 193 samples for that genomic region
 - Metadata and indexing information for rapid access
 - Sample mapping and reference information
 
@@ -894,7 +894,7 @@ The consolidation process includes several validation steps:
 
 #### Expected Performance Metrics
 Well-executed GenomicsDB consolidation should show:
-- **Complete sample integration**: All 61 samples successfully imported into each workspace
+- **Complete sample integration**: All 193 samples successfully imported into each workspace
 - **Compression efficiency**: Significant storage reduction compared to raw GVCF files
 - **Access performance**: Rapid query response times for genomic intervals
 - **Data integrity**: Perfect preservation of variant and non-variant site information
@@ -911,7 +911,7 @@ The GenomicsDB workspaces created here serve as optimized input for:
 - **Population analysis**: Efficient access to population-level variant data
 - **Quality control**: Sample-level and site-level filtering based on joint statistics
 
-This step represents a critical data transformation that enables population-scale analysis. By converting scattered individual variant files into an integrated, optimized database format, it creates the foundation for sophisticated joint variant calling that leverages information from all 61 tick samples simultaneously.
+This step represents a critical data transformation that enables population-scale analysis. By converting scattered individual variant files into an integrated, optimized database format, it creates the foundation for sophisticated joint variant calling that leverages information from all 193 tick samples simultaneously.
 
 ---
 
@@ -921,7 +921,7 @@ This step represents a critical data transformation that enables population-scal
 **Runtime**: 1 day (Step 11a) + 1 second (Step 11b), distributed processing  
 
 #### Purpose and Context
-This final variant calling step performs joint genotyping across all 61 tick samples simultaneously, leveraging information from the entire population to make more accurate variant calls. The process occurs in two phases: first, joint genotyping is performed on each genomic chunk using the GenomicsDB workspaces, then all chunks are assembled into a single comprehensive population VCF file. This approach dramatically improves variant calling accuracy compared to individual sample calling by using population-level information to distinguish true variants from sequencing artifacts.
+This final variant calling step performs joint genotyping across all 193 tick samples simultaneously, leveraging information from the entire population to make more accurate variant calls. The process occurs in two phases: first, joint genotyping is performed on each genomic chunk using the GenomicsDB workspaces, then all chunks are assembled into a single comprehensive population VCF file. This approach dramatically improves variant calling accuracy compared to individual sample calling by using population-level information to distinguish true variants from sequencing artifacts.
 
 #### Biological Rationale for Joint Genotyping
 Joint genotyping provides several critical advantages for population genomics:
@@ -954,7 +954,7 @@ The first script performs joint genotyping on each genomic chunk:
 
 **Scratch optimization**: Copies reference genomes and databases to high-performance scratch storage to minimize I/O bottlenecks during intensive computations.
 
-**Memory management**: Allocates 90GB per job to handle complex genotyping calculations across all 61 samples simultaneously.
+**Memory management**: Allocates 90GB per job to handle complex genotyping calculations across all 193 samples simultaneously.
 
 **Parallel processing**: Runs 10 simultaneous jobs, each processing one genomic chunk independently.
 
@@ -1015,7 +1015,7 @@ Joint genotyping typically shows substantial improvements over individual callin
 #### Expected Population Variant Dataset
 The final VCF should contain:
 - **Total variants**: Hundreds of thousands to millions of SNPs and indels across the tick genome
-- **Sample coverage**: All 61 tick samples with complete genotype information
+- **Sample coverage**: All 193 tick samples with complete genotype information
 - **Quality metrics**: Population-informed quality scores and statistics
 - **Allele frequencies**: Population-level allele frequency estimates
 - **Format compliance**: Standard VCF format compatible with downstream tools
@@ -1034,7 +1034,7 @@ The final population VCF serves as input for:
 - **PCA analysis**: Principal component analysis for population structure
 - **Diversity calculations**: Population genetic diversity metrics
 
-This two-phase joint calling process transforms the individual sample variant data into a comprehensive population-level dataset that captures the genetic diversity present in the 61 tick samples. The final VCF represents the complete variant catalog for subsequent population genetic analyses, filtering, and biological interpretation.
+This two-phase joint calling process transforms the individual sample variant data into a comprehensive population-level dataset that captures the genetic diversity present in the 193 tick samples. The final VCF represents the complete variant catalog for subsequent population genetic analyses, filtering, and biological interpretation.
 
 ---
 
@@ -1111,7 +1111,7 @@ The extracted SNP dataset should show:
 This step enables assessment of:
 - **Variant type composition**: Proportion of SNPs vs. other variant types in the original dataset
 - **Quality preservation**: Maintenance of variant quality information during extraction
-- **Sample completeness**: Verification that all 61 samples retain data in the SNP subset
+- **Sample completeness**: Verification that all 193 samples retain data in the SNP subset
 - **Coordinate integrity**: Proper genomic ordering and indexing of extracted variants
 
 #### Expected Performance Metrics
@@ -1228,7 +1228,7 @@ Successful hard filtering should demonstrate:
 - **Appropriate filter rates**: Neither too lenient (>20% failures) nor too stringent (<5% failures)
 - **Quality improvement**: Better overall quality score distributions in passing variants
 - **Biological consistency**: Filter failures concentrated in expected problematic regions
-- **Sample uniformity**: Consistent filtering outcomes across all 61 tick samples
+- **Sample uniformity**: Consistent filtering outcomes across all 193 tick samples
 
 #### Integration with Downstream Analysis
 The quality-annotated dataset serves as input for:
@@ -1281,7 +1281,7 @@ The selection process typically results in:
 
 **Quality improvement**: Dramatic improvement in overall dataset quality metrics, with remaining variants showing higher confidence scores and better statistical properties.
 
-**Sample retention**: All 61 tick samples are maintained in the dataset, but some samples may have fewer called variants in regions where low-quality variants were removed.
+**Sample retention**: All 193 tick samples are maintained in the dataset, but some samples may have fewer called variants in regions where low-quality variants were removed.
 
 **Genomic coverage**: High-quality variants should be well-distributed across the accessible tick genome, though some problematic regions may show reduced variant density.
 
@@ -1321,7 +1321,7 @@ Well-executed variant selection should show:
 - **Retention rate**: 85-95% of original SNPs retained in high-quality dataset
 - **Quality improvement**: Substantial improvement in average variant quality scores
 - **Coverage maintenance**: Adequate variant density across the tick genome
-- **Sample representation**: All 61 samples with reasonable variant counts
+- **Sample representation**: All 193 samples with reasonable variant counts
 
 #### Integration with Population Analysis
 The high-confidence SNP dataset serves as input for:
@@ -1349,7 +1349,7 @@ The final high-confidence dataset should provide:
 - **Demographic insights**: Clean data for inferring population history and gene flow
 - **Evolutionary analysis**: High-quality variants for selection and adaptation studies
 
-This step completes the technical quality control phase of the pipeline, transforming the comprehensive variant dataset into a curated collection of high-confidence SNPs ready for biological analysis. The resulting dataset represents the optimal balance between stringent quality control and sufficient variant density for meaningful population genetic inferences about the 61 tick samples.
+This step completes the technical quality control phase of the pipeline, transforming the comprehensive variant dataset into a curated collection of high-confidence SNPs ready for biological analysis. The resulting dataset represents the optimal balance between stringent quality control and sufficient variant density for meaningful population genetic inferences about the 193 tick samples.
 
 ---
 
@@ -1463,20 +1463,20 @@ Population genetic analyses require variants that meet specific criteria for sta
 
 **Minor Allele Frequency (MAF ≥ 0.05)**:
 - Retains variants where the less common allele appears in at least 5% of chromosomes
-- For 61 diploid samples (122 chromosomes), this means ≥6 copies of the minor allele
+- For 193 diploid samples (122 chromosomes), this means ≥6 copies of the minor allele
 - Excludes singletons and very rare variants that provide minimal information for population structure
 - Focuses analysis on variants with sufficient representation across the population
 
 **Missingness Threshold (≥70% complete data)**:
 - Requires variants to have successful genotype calls in at least 70% of samples
-- For 61 samples, this means ≥43 samples must have called genotypes
+- For 193 samples, this means ≥43 samples must have called genotypes
 - Excludes variants with excessive missing data that could bias population analyses
 - Balances data completeness with variant retention
 
 #### VCFtools Implementation Strategy
 VCFtools provides efficient population genetic filtering:
 
-**Frequency calculation**: Automatically calculates minor allele frequencies across all 61 samples
+**Frequency calculation**: Automatically calculates minor allele frequencies across all 193 samples
 **Missing data assessment**: Evaluates completeness on a per-variant basis
 **Combined filtering**: Applies both criteria simultaneously for efficiency
 **Format preservation**: Maintains VCF format compatibility while applying population filters
@@ -1553,7 +1553,7 @@ The population-filtered dataset should provide:
 - **Geographic patterns**: Spatial genetic structure if present in the tick samples
 - **Evolutionary insights**: Data for understanding tick population dynamics and gene flow
 
-This step completes the transition from technical quality control to biological optimization, creating a dataset specifically tailored for population genetic discovery. The resulting variants represent the most informative subset for understanding population structure, demographic history, and evolutionary processes in the 61 tick samples.
+This step completes the transition from technical quality control to biological optimization, creating a dataset specifically tailored for population genetic discovery. The resulting variants represent the most informative subset for understanding population structure, demographic history, and evolutionary processes in the 193 tick samples.
 
 ---
 
@@ -1563,7 +1563,7 @@ This step completes the transition from technical quality control to biological 
 **Runtime**: 1 hour, single job, 12 CPUs, 90GB memory  
 
 #### Purpose and Context
-This step converts the population-optimized VCF dataset to PLINK binary format and performs Principal Component Analysis (PCA) to reveal population structure and genetic relationships among the 61 tick samples. PCA is the gold standard method for population structure analysis, transforming the high-dimensional genetic data into interpretable components that capture the major axes of genetic variation. This analysis represents the culmination of the entire pipeline, revealing the underlying population genetic patterns in the tick dataset.
+This step converts the population-optimized VCF dataset to PLINK binary format and performs Principal Component Analysis (PCA) to reveal population structure and genetic relationships among the 193 tick samples. PCA is the gold standard method for population structure analysis, transforming the high-dimensional genetic data into interpretable components that capture the major axes of genetic variation. This analysis represents the culmination of the entire pipeline, revealing the underlying population genetic patterns in the tick dataset.
 
 #### Biological Rationale for Population Structure Analysis
 Understanding population structure is fundamental to population genomics:
@@ -1679,7 +1679,7 @@ The population structure analysis should reveal:
 - **Geographic patterns**: Spatial structure reflecting tick ecology and dispersal patterns
 - **Conservation implications**: Information relevant to tick population management and disease ecology
 
-This step represents the analytical culmination of the entire pipeline, transforming millions of raw sequencing reads into interpretable population genetic insights. The PCA results provide the foundation for understanding the evolutionary biology, ecology, and population dynamics of the 61 tick samples, enabling both basic research discoveries and applied insights relevant to tick-borne disease management.
+This step represents the analytical culmination of the entire pipeline, transforming millions of raw sequencing reads into interpretable population genetic insights. The PCA results provide the foundation for understanding the evolutionary biology, ecology, and population dynamics of the 193 tick samples, enabling both basic research discoveries and applied insights relevant to tick-borne disease management.
 
 ---
 
@@ -1802,7 +1802,7 @@ This final step completes the transformation from raw sequencing data to biologi
 ## Pipeline Completion Summary
 
 **Comprehensive Analysis Achieved:**
-This 17-step pipeline has successfully transformed 61 tick samples from raw NovaSeq sequencing reads into detailed population genetic insights. The complete workflow encompasses:
+This 17-step pipeline has successfully transformed 193 tick samples from raw NovaSeq sequencing reads into detailed population genetic insights. The complete workflow encompasses:
 
 - **Preprocessing (Steps 1-8)**: Quality control, alignment, and data preparation
 - **Variant Calling (Steps 9-11)**: GATK-based population variant discovery  
